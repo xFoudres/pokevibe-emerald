@@ -995,7 +995,6 @@ struct SaveBlock1
     /*0x234*/ u8 playerPartyCount;
     /*0x235*/ //u8 padding2[3];
     /*0x238*/ struct Pokemon playerParty[PARTY_SIZE];
-              u8 playerId[16]; // PlayerID to map on-chain with address
     /*0x490*/ u32 money;
     /*0x494*/ u16 coins;
     /*0x496*/ u16 registeredItem; // registered for use with SELECT button
