@@ -39,6 +39,6 @@ static void Task_WalletMenuWait(u8 taskId)
         u8 windowId = gTasks[taskId].data[0];
         ClearStdWindowAndFrameToTransparent(windowId, TRUE);
         RemoveWindow(windowId);
-        DestroyTask(taskId);
+        gTasks[taskId].func = Task_DisplayMainMenu; // Return to main menu
     }
 }
