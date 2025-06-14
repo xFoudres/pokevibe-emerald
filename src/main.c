@@ -70,6 +70,7 @@ COMMON_DATA u32 IntrMain_Buffer[0x200] = {0};
 COMMON_DATA s8 gPcmDmaCounter = 0;
 
 static EWRAM_DATA u16 sTrainerId = 0;
+static EWRAM_DATA u8 sGameStartFlag = 0;
 
 //EWRAM_DATA void (**gFlashTimerIntrFunc)(void) = NULL;
 
@@ -131,6 +132,15 @@ void AgbMain(void)
     for (;;)
     {
         ReadKeys();
+
+        if (gMain.state == 0)
+        {
+            sGameStartFlag = 1;
+        }
+        else
+        {
+            sGameStartFlag = 0;
+        }
 
         if (gSoftResetDisabled == FALSE
          && JOY_HELD_RAW(A_BUTTON)
