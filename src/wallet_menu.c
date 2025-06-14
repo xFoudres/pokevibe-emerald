@@ -4,7 +4,7 @@
 #include "window.h"
 #include "strings.h"
 #include "string_util.h"
-#include "pokemon.h" // For GetTrainerId
+#include "new_game.h" // For GetTrainerId
 #include "main.h"    // For gMain
 #include "main_menu.h" // For Task_HandleMainMenuInput
 
