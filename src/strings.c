@@ -253,8 +253,6 @@ const u8 gText_TheBattle[] = _("the battle");
 const u8 gText_ThePokemonList[] = _("the POKéMON LIST");
 const u8 gText_TheShop[] = _("the shop");
 const u8 gText_ThePC[] = _("the PC");
-const u8 gText_WalletID[] = _("Trainer ID:");
-const u8 gText_Wallet[] = _("Wallet");
 
 const u8 *const gBagMenu_ReturnToStrings[] =
 {
@@ -1821,3 +1819,9 @@ const u8 gText_Answer[] = _("ANSWER");
 const u8 gText_PokeBalls[] = _("POKé BALLS");
 const u8 gText_Berry[] = _("BERRY");
 const u8 gText_Berries[] = _("BERRIES");
+
+// WalletID 
+
+const u8 gText_WalletID[] = _("Trainer ID:");
+const u8 gText_Wallet[] = _("Wallet");
+
