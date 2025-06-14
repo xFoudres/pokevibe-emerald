@@ -4,6 +4,12 @@
 #include "window.h"
 #include "strings.h"
 #include "string_util.h"
+#include "pokemon.h" // For GetTrainerId
+#include "main.h"    // For gMain
+#include "main_menu.h" // For Task_HandleMainMenuInput
+
+// Forward declaration to avoid "used prior to declaration" error
+static void Task_WalletMenuWait(u8 taskId);
 
 static const struct WindowTemplate sWalletWindowTemplate =
 {
@@ -39,6 +45,6 @@ static void Task_WalletMenuWait(u8 taskId)
         u8 windowId = gTasks[taskId].data[0];
         ClearStdWindowAndFrameToTransparent(windowId, TRUE);
         RemoveWindow(windowId);
-        gTasks[taskId].func = Task_DisplayMainMenu; // Return to main menu
+        gTasks[taskId].func = Task_HandleMainMenuInput; // Return to main menu input handler
     }
 }
