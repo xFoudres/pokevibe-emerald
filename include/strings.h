@@ -3026,4 +3026,9 @@ extern const u8 gText_BoxName[];
 extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_TellHimTheWords[];
 
+// WalletID 
+
+extern const u8 gText_WalletID[];
+extern const u8 gText_Wallet[];
+
 #endif // GUARD_STRINGS_H
