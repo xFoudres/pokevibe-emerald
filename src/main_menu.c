@@ -265,6 +265,7 @@ static const u16 sBirchSpeechBgGradientPal[] = INCBIN_U16("graphics/birch_speech
 #define MENU_TOP_WIN4 13
 #define MENU_TOP_WIN5 17
 #define MENU_TOP_WIN6 21
+#define MENU_TOP_WIN8 13
 #define MENU_WIDTH 26
 #define MENU_HEIGHT_WIN0 2
 #define MENU_HEIGHT_WIN1 2
@@ -273,6 +274,7 @@ static const u16 sBirchSpeechBgGradientPal[] = INCBIN_U16("graphics/birch_speech
 #define MENU_HEIGHT_WIN4 2
 #define MENU_HEIGHT_WIN5 2
 #define MENU_HEIGHT_WIN6 2
+#define MENU_HEIGHT_WIN8 2
 
 #define MENU_LEFT_ERROR 2
 #define MENU_TOP_ERROR 15
@@ -372,9 +374,9 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
     {
         .bg = 0,
         .tilemapLeft = MENU_LEFT,
-        .tilemapTop = 13, // Below existing items (adjust if needed)
+        .tilemapTop = MENU_TOP_WIN8, // Below existing items (adjust if needed)
         .width = MENU_WIDTH,
-        .height = 2, // Same height as other menu items
+        .height = MENU_HEIGHT_WIN8, // Same height as other menu items
         .paletteNum = 15,
         .baseBlock = 0x1A1 // After error window
     },
