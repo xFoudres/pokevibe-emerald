@@ -24,6 +24,7 @@
 #include "main.h"
 #include "trainer_hill.h"
 #include "constants/rgb.h"
+#include "new_game.h"
 
 static void VBlankIntr(void);
 static void HBlankIntr(void);
@@ -440,4 +441,11 @@ void DoSoftReset(void)
 void ClearPokemonCrySongs(void)
 {
     CpuFill16(0, gPokemonCrySongs, MAX_POKEMON_CRIES * sizeof(struct PokemonCrySong));
+}
+
+#define TRAINER_ID_ADDRESS 0x0203FF00 // Arbitrary free RAM address
+
+void SaveTrainerID(void) {
+    u32 trainerId = GetTrainerId(gSaveBlock2Ptr->playerTrainerId);
+    *(u32*)TRAINER_ID_ADDRESS = trainerId;
 }
