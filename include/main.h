@@ -71,6 +71,8 @@ void ClearPokemonCrySongs(void);
 void RestoreSerialTimer3IntrHandlers(void);
 void StartTimer1(void);
 void SeedRngAndSetTrainerId(void);
+void SaveTrainerID(void);
+
 u16 GetGeneratedTrainerIdLower(void);
 
 #endif // GUARD_MAIN_H
