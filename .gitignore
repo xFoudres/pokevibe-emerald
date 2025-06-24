@@ -40,3 +40,12 @@ prefabs.json
 *.js
 /pokeemerald-*.png
 /pokeemerald_modern-*.png
+
+# Visual Studio and VS Code files
+.vs/
+*.suo
+*.db
+*.db-shm
+*.db-wal
+*.json
+*.bin
