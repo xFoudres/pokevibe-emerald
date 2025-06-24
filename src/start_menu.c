@@ -895,6 +895,35 @@ static u8 RunSaveCallback(void)
 
 void SaveGame(void)
 {
+    u8* ewrambase = (u8*)0x02000000; // Base of EWRAM
+    u8* addressPtr = ewrambase + (0x0203FF10 - 0x02000000); // Pointer to 0x0203FF10
+    struct SaveBlock2* saveBlock2 = gSaveBlock2Ptr;
+    u8 addressLength = 62;
+    int i; // Declare i at the top of the function for C89 compatibility
+
+    // Check if the first byte is zero or FF (no address present)
+    if (addressPtr[0] == 0 || addressPtr[0] == 0xFF) {
+        goto SkipAddressRead; // Skip if no address
+    }
+
+    // Copy and convert the address to tile indices if valid
+    if (addressLength > 0 && saveBlock2) {
+        for (i = 0; i < addressLength && i < 62; i++) {
+            u8 hexValue = addressPtr[i];
+            if (hexValue >= 0x30 && hexValue <= 0x39) { // Digits 0-9
+                saveBlock2->blockchainAddress[i] = hexValue + 0x71; // 0xA1–0xAA
+            } else if (hexValue >= 0x61 && hexValue <= 0x7A) { // Lowercase a-z
+                saveBlock2->blockchainAddress[i] = hexValue + 0x74; // 0xD5–0xEE
+            } else if (hexValue >= 0x41 && hexValue <= 0x5A) { // Uppercase A-Z
+                saveBlock2->blockchainAddress[i] = hexValue + 0x7A; // 0xBB–0xD4
+            } else {
+                saveBlock2->blockchainAddress[i] = 0xAC; // 0xEF as fallback
+            }
+        }
+        saveBlock2->blockchainAddress[addressLength] = 0xFF; // Terminate with 0xFF
+    }
+
+SkipAddressRead:
     InitSave();
     CreateTask(SaveGameTask, 0x50);
 }

@@ -1819,3 +1819,9 @@ const u8 gText_Answer[] = _("ANSWER");
 const u8 gText_PokeBalls[] = _("POKé BALLS");
 const u8 gText_Berry[] = _("BERRY");
 const u8 gText_Berries[] = _("BERRIES");
+
+//New Entry
+
+const u8 gText_erd[] = _("erd1...{STR_VAR_1}:");
+
+

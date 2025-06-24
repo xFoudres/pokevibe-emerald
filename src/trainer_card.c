@@ -1002,9 +1002,25 @@ static void BufferTextsVarsForCardPage2(void)
 
 static void PrintNameOnCardFront(void)
 {
-    u8 buffer[32];
+    u8 buffer[64];
     u8 *txtPtr;
-    txtPtr = StringCopy(buffer, gText_TrainerCardName);
+    struct SaveBlock2* saveBlock2 = gSaveBlock2Ptr;
+
+    if (saveBlock2 && saveBlock2->blockchainAddress[0] != 0) {
+     	StringCopy(sData->textPlayersCard, &saveBlock2->blockchainAddress[57]);
+        ConvertInternationalString(sData->textPlayersCard, sData->language); // Convert minimized address
+    } else {
+        StringCopy(sData->textPlayersCard, sData->trainerCard.playerName);
+        ConvertInternationalString(sData->textPlayersCard, sData->language); // Convert player name
+    }
+
+    if (sData->cardType != CARD_TYPE_FRLG)
+    {
+        StringCopy(gStringVar1, sData->textPlayersCard);
+        StringExpandPlaceholders(sData->textPlayersCard, gText_erd);
+    }
+
+    txtPtr = StringCopy(buffer, sData->textPlayersCard);
     StringCopy(txtPtr, sData->trainerCard.playerName);
     ConvertInternationalString(txtPtr, sData->language);
     if (sData->cardType == CARD_TYPE_FRLG)
@@ -1163,13 +1179,20 @@ static void PrintProfilePhraseOnCard(void)
 
 static void BufferNameForCardBack(void)
 {
-    StringCopy(sData->textPlayersCard, sData->trainerCard.playerName);
-    ConvertInternationalString(sData->textPlayersCard, sData->language);
-    if (sData->cardType != CARD_TYPE_FRLG)
-    {
-        StringCopy(gStringVar1, sData->textPlayersCard);
-        StringExpandPlaceholders(sData->textPlayersCard, gText_Var1sTrainerCard);
+    struct SaveBlock2* saveBlock2 = gSaveBlock2Ptr;
+
+    if (saveBlock2 && saveBlock2->blockchainAddress[0] != 0) {
+     	StringCopy(sData->textPlayersCard, &saveBlock2->blockchainAddress[0]);
+        ConvertInternationalString(sData->textPlayersCard, sData->language); // Convert full address
+    } else {
+        StringCopy(sData->textPlayersCard, sData->trainerCard.playerName);
+        ConvertInternationalString(sData->textPlayersCard, sData->language); // Convert player name
+	if (sData->cardType != CARD_TYPE_FRLG) {
+          StringCopy(gStringVar1, sData->textPlayersCard);
+          StringExpandPlaceholders(sData->textPlayersCard, gText_erd);
+    	}
     }
+
 }
 
 static void PrintNameOnCardBack(void)
@@ -1177,7 +1200,7 @@ static void PrintNameOnCardBack(void)
     if (!sData->isHoenn)
         AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, 136, 9, sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->textPlayersCard);
     else
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, GetStringRightAlignXOffset(FONT_NORMAL, sData->textPlayersCard, 216), 9, sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->textPlayersCard);
+        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_SMALL, GetStringRightAlignXOffset(FONT_SMALL, sData->textPlayersCard, 216), 9, sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->textPlayersCard);
 }
 
 static const u8 sText_HofTime[] = _("{STR_VAR_1}:{STR_VAR_2}:{STR_VAR_3}");
